@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المهندس الحسن خالد وليد | هندسة ميكانيكية وصيانة سيارات</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Cairo & Tajawal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js CDN for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0b0f19',     /* Deep Carbon Blue */
+                            card: '#111827',     /* Dark Grey Slate */
+                            accent: '#06b6d4',   /* Electric Cyan */
+                            accentHover: '#0891b2',
+                            textMuted: '#9ca3af' /* Cool Grey */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0891b2;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Navbar / Header -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo / Brand -->
+            <a href="#home" class="flex items-center space-x-2 space-x-reverse group">
+                <div class="bg-brand-accent text-brand-dark p-2 rounded-lg font-black text-xl transition-all duration-300 group-hover:rotate-12">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wide block leading-none">م. الحسن خالد</span>
+                    <span class="text-xs text-brand-accent font-bold">هندسة ميكانيكية</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 space-x-reverse font-medium">
+                <a href="#home" class="hover:text-brand-accent transition-colors duration-200">الرئيسية</a>
+                <a href="#about-me" class="hover:text-brand-accent transition-colors duration-200">من نحن</a>
+                <a href="#services" class="hover:text-brand-accent transition-colors duration-200">خدمات الورشة</a>
+                <a href="#booking" class="bg-brand-accent hover:bg-brand-accentHover text-brand-dark px-5 py-2 rounded-full font-bold transition-all duration-300 transform hover:scale-105 shadow-md shadow-brand-accent/20">احجز موعداً الآن</a>
+            </nav>
+
+            <!-- Hamburger Button -->
+            <button id="menuBtn" class="flex flex-col justify-between w-8 h-6 z-50 focus:outline-none group">
+                <span class="w-full h-1 bg-brand-accent rounded transition-all duration-300 origin-right"></span>
+                <span class="w-3/4 h-1 bg-brand-accent rounded transition-all duration-300 origin-right self-end group-hover:w-full"></span>
+                <span class="w-full h-1 bg-brand-accent rounded transition-all duration-300 origin-right"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Side Navigation Menu (Drawer) -->
+    <div id="sideDrawer" class="fixed top-0 right-0 w-full sm:w-96 h-full bg-gray-950/98 backdrop-blur-lg z-50 transform translate-x-full transition-transform duration-500 ease-in-out border-l border-gray-800 shadow-2xl flex flex-col justify-between">
+        <div class="p-6">
+            <!-- Close Button Header -->
+            <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+                <span class="text-lg font-bold text-brand-accent"><i class="fa-solid fa-bars-staggered ml-2"></i> القائمة الرئيسية</span>
+                <button id="closeDrawerBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Drawer Profile Info -->
+            <div class="flex items-center space-x-4 space-x-reverse mb-8 p-3 bg-gray-900/50 rounded-xl">
+                <img src="image.png" alt="المهندس الحسن خالد" class="w-14 h-14 object-cover rounded-full border-2 border-brand-accent shadow">
+                <div>
+                    <h4 class="font-bold text-sm">المهندس الحسن خالد</h4>
+                    <p class="text-xs text-brand-textMuted">خريج جامعة البصرة</p>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <nav class="flex flex-col space-y-4 text-right">
+                <a href="#home" class="drawer-link flex items-center p-3 rounded-lg hover:bg-gray-900 text-lg transition-all"><i class="fa-solid fa-house ml-3 text-brand-accent"></i> الرئيسية</a>
+                <a href="#about-me" class="drawer-link flex items-center p-3 rounded-lg hover:bg-gray-900 text-lg transition-all"><i class="fa-solid fa-user-tie ml-3 text-brand-accent"></i> من نحن (الحسن خالد)</a>
+                <a href="#services" class="drawer-link flex items-center p-3 rounded-lg hover:bg-gray-900 text-lg transition-all"><i class="fa-solid fa-gears ml-3 text-brand-accent"></i> خدمات الورشة</a>
+                <a href="#booking" class="drawer-link flex items-center p-3 rounded-lg hover:bg-gray-900 text-lg transition-all"><i class="fa-solid fa-calendar-check ml-3 text-brand-accent"></i> احجز موعد صيانة</a>
+            </nav>
+        </div>
+
+        <!-- Social and Footer in Drawer -->
+        <div class="p-6 border-t border-gray-800 bg-gray-950/50">
+            <h5 class="text-sm font-bold text-brand-accent mb-3">تواصل مباشرة:</h5>
+            <div class="flex space-x-4 space-x-reverse mb-4">
+                <a href="https://wa.me/9647823171438" target="_blank" class="w-10 h-10 rounded-full bg-green-600/20 text-green-400 flex items-center justify-center hover:bg-green-600 hover:text-white transition-all">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                </a>
+                <a href="tel:+9647823171438" class="w-10 h-10 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                    <i class="fa-solid fa-phone text-lg"></i>
+                </a>
+            </div>
+            <p class="text-xs text-brand-textMuted">العراق، البصرة</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen pt-24 pb-12 flex items-center justify-center relative overflow-hidden">
+        <!-- Background Grid and Glows -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#1e293b,transparent_60%)] opacity-30"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-brand-accent/5 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-4 z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Info Column -->
+            <div class="lg:col-span-7 text-right space-y-6">
+                <div class="inline-flex items-center space-x-2 space-x-reverse bg-brand-accent/10 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-sm font-bold mb-2 animate-pulse">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>جامعة البصرة | قسم الهندسة الميكانيكية</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+                    المهندس <span class="text-brand-accent relative inline-block">الحسن خالد وليد <span class="absolute bottom-1 right-0 w-full h-2 bg-brand-accent/20 rounded"></span></span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed font-light">
+                    خبير الهندسة الميكانيكية الشغوف بعالم السيارات وأنظمتها المعقدة. نجمع بين العلم الأكاديمي الهندسي والخبرة العملية والاحترافية العالية في الورشة الخاصة بنا لنقدم لسيارتك أفضل رعاية وصيانة متكاملة.
+                </p>
+
+                <!-- Key Metrics Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 max-w-lg">
+                    <div class="bg-gray-900/50 p-3 rounded-xl border border-gray-800 hover:border-brand-accent/50 transition-colors">
+                        <span class="text-brand-accent font-black text-2xl block">أكاديمي</span>
+                        <span class="text-xs text-gray-400">هندسة ميكانيكية</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-3 rounded-xl border border-gray-800 hover:border-brand-accent/50 transition-colors">
+                        <span class="text-brand-accent font-black text-2xl block">تكنولوجيا</span>
+                        <span class="text-xs text-gray-400">فحص وبرمجة كمبيوتر</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-3 rounded-xl border border-gray-800 hover:border-brand-accent/50 transition-colors col-span-2 sm:col-span-1">
+                        <span class="text-brand-accent font-black text-2xl block">احترافية</span>
+                        <span class="text-xs text-gray-400">صيانة ميكانيكية متقدمة</span>
+                    </div>
+                </div>
+
+                <!-- Call to Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <a href="#booking" class="bg-brand-accent hover:bg-brand-accentHover text-brand-dark px-8 py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-brand-accent/25 flex items-center justify-center">
+                        <i class="fa-solid fa-wrench ml-2"></i> حجز موعد صيانة
+                    </a>
+                    <a href="#about-me" class="bg-gray-900 hover:bg-gray-800 text-white border border-gray-800 px-8 py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+                        تعرّف على المهندس الحسن
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Image Column (Using Image.png) -->
+            <div class="lg:col-span-5 flex justify-center items-center">
+                <div class="relative w-72 h-72 sm:w-85 sm:h-85 md:w-96 md:h-96 group">
+                    <!-- Rotating Decorative Frame -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-accent via-blue-600 to-indigo-500 rounded-3xl rotate-6 opacity-80 group-hover:rotate-12 transition-all duration-500 shadow-xl shadow-brand-accent/10"></div>
+                    <div class="absolute inset-0 bg-brand-dark rounded-3xl -rotate-3 transition-transform duration-500 group-hover:-rotate-6 border border-gray-800"></div>
+                    
+                    <!-- Main Image wrapper -->
+                    <div class="absolute inset-1.5 overflow-hidden rounded-2xl bg-gray-900 border-2 border-gray-700">
+                        <img src="image.png" alt="المهندس الحسن خالد وليد" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter contrast-105">
+                        
+                        <!-- Floating Info Label -->
+                        <div class="absolute bottom-4 right-4 left-4 bg-gray-900/90 backdrop-blur-md p-3 rounded-xl border border-gray-700/50 text-right">
+                            <h3 class="font-bold text-white text-base">م. الحسن خالد وليد</h3>
+                            <p class="text-xs text-brand-accent">أخصائي ميكانيك وصيانة سيارات حديثة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me / Who We Are Section -->
+    <section id="about-me" class="py-24 bg-gray-900/40 border-y border-gray-800/80 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-base text-brand-accent font-bold tracking-widest uppercase mb-2"><i class="fa-solid fa-circle-info ml-2"></i> مَن هو المهندس الحسن؟</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">الخبرة الأكاديمية تلتقي بالمهارة اليدوية</h3>
+                <div class="w-24 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Academic and Work Story -->
+                <div class="lg:col-span-7 space-y-6 text-right">
+                    <h4 class="text-2xl font-bold text-white">رحلة تجمع بين شغف السيارات والتحصيل الأكاديمي</h4>
+                    <p class="text-gray-300 leading-relaxed">
+                        تخرج المهندس <span class="text-brand-accent font-bold">الحسن خالد وليد</span> من صرح <span class="text-white font-semibold">جامعة البصرة العريقة - قسم الهندسة الميكانيكية</span>. لم يكن اهتمامه بالميكانيك مجرد دراسة نظرية بل كان شغفاً متأصلاً مكنّه من فهم ديناميكية حركة المركبات، هندسة المحركات، وتفاصيل دورات الاحتراق الداخلي.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        قام المهندس الحسن بتأسيس ورشته المتخصصة لصيانة السيارات وتطوير أدائها، ليوظف معرفته الهندسية العميقة في تشخيص وحل أعقد الأعطال بأحدث الأجهزة الإلكترونية والتقنيات الرقمية المتقدمة ليكون الخيار الأمثل لكل من يبحث عن الأمان والدقة والاحترافية لسيارته في البصرة.
+                    </p>
+
+                    <!-- Features bullets -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start space-x-3 space-x-reverse">
+                            <div class="bg-brand-accent/10 p-2 rounded-lg text-brand-accent">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">بكالوريوس هندسة ميكانيكية</h5>
+                                <p class="text-xs text-gray-400">فهم علمي دقيق للمحركات والديناميك الحراري.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 space-x-reverse">
+                            <div class="bg-brand-accent/10 p-2 rounded-lg text-brand-accent">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">أجهزة فحص وبرمجة كمبيوتر حديثة</h5>
+                                <p class="text-xs text-gray-400">تحديد دقيق للأعطال لتفادي تبديل القطع غير الضرورية.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 space-x-reverse">
+                            <div class="bg-brand-accent/10 p-2 rounded-lg text-brand-accent">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">التزام تام بمعايير السلامة والأمان</h5>
+                                <p class="text-xs text-gray-400">سلامتك على الطريق هي أولويتنا القصوى أثناء الصيانة.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 space-x-reverse">
+                            <div class="bg-brand-accent/10 p-2 rounded-lg text-brand-accent">
+                                <i class="fa-solid fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">شفافية مطلقة في تسعير القطع والعمل</h5>
+                                <p class="text-xs text-gray-400">تزويد العميل بتقرير شامل وكامل لجميع التكاليف والقطع المستبدلة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Visual Cards -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-accent/30 transition-all duration-300 transform hover:-translate-y-2 text-right">
+                        <span class="text-brand-accent text-3xl block mb-4"><i class="fa-solid fa-compass-drafting"></i></span>
+                        <h4 class="font-bold text-lg text-white mb-2">الدقة الهندسية</h4>
+                        <p class="text-xs text-brand-textMuted">نطبق أعلى المعايير الهندسية في الفك والتركيب والتشخيص الدقيق.</p>
+                    </div>
+
+                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-accent/30 transition-all duration-300 transform hover:-translate-y-2 text-right mt-6">
+                        <span class="text-brand-accent text-3xl block mb-4"><i class="fa-solid fa-gauge-high"></i></span>
+                        <h4 class="font-bold text-lg text-white mb-2">تعديل ورفع الكفاءة</h4>
+                        <p class="text-xs text-brand-textMuted">موازنة وضبط دورات المحرك للحصول على أفضل استهلاك للوقود وأقوى أداء.</p>
+                    </div>
+
+                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-accent/30 transition-all duration-300 transform hover:-translate-y-2 text-right -mt-6">
+                        <span class="text-brand-accent text-3xl block mb-4"><i class="fa-solid fa-shield-halved"></i></span>
+                        <h4 class="font-bold text-lg text-white mb-2">ضمان حقيقي</h4>
+                        <p class="text-xs text-brand-textMuted">نقف خلف جودة عملنا ونقدم ضماناً موثوقاً على أعمال الصيانة داخل الورشة.</p>
+                    </div>
+
+                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-800 hover:border-brand-accent/30 transition-all duration-300 transform hover:-translate-y-2 text-right">
+                        <span class="text-brand-accent text-3xl block mb-4"><i class="fa-solid fa-clock"></i></span>
+                        <h4 class="font-bold text-lg text-white mb-2">احترام المواعيد</h4>
+                        <p class="text-xs text-brand-textMuted">نهتم بوقتك الثمين، لذلك وفرنا لك نظام حجز مسبق لتجنب الانتظار الطويل.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-base text-brand-accent font-bold tracking-widest uppercase mb-2"><i class="fa-solid fa-gears ml-2"></i> خدمات الورشة الاحترافية</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">ماذا نقدم لسيارتك في ورشتنا؟</h3>
+                <div class="w-24 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-right">
+                <!-- Service 1 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-computer"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">فحص وبرمجة كمبيوتر متقدمة</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">نستخدم أحدث أجهزة التشخيص لقراءة جميع الحساسات (Sensors) ومسح الأخطاء لجميع أنواع السيارات الحديثة وتوفير تقارير مفصلة.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> فحص شامل للضفيرة والحساسات</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> برمجة العقول (ECU) وعلب السرعة</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-car-battery"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">الأنظمة الكهربائية والإلكترونية</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">صيانة وإصلاح كافة الدوائر الكهربائية، المولدات (دينامو)، أجهزة البدء (سلف)، وأنظمة التكييف والتحكم بالمناخ الداخلي للسيارات.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> كشف تهريب شحنات الكهرباء</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> فحص كفاءة البطاريات والدينامو</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-oil-can"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">الميكانيك العام وصيانة المحركات</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">أعلى مستويات الصيانة الميكانيكية، من تصفية المحركات الدورية وحتى فك وتوضيب المحركات المعقدة بأيدي هندسية متمرسة.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> تصفية المحركات وتبديل شمعات الاحتراق</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> معالجة مشاكل ارتفاع حرارة المحرك</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-road"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">نظام التوجيه والتعليق (الدبلات)</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">صيانة نظام التعليق بالكامل (المساعدات، المجموعات المطاطية، المقود) لضمان اتزان مثالي وثبات تام للسيارة على المنعطفات والطرق الوعرة.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> فحص وصيانة المساعدات والمقصات</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> فحص وصيانة المكابح (الفرامل)</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-filter"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">الخدمات السريعة والدورية</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">تغيير الزيوت والفلاتر من أفضل الماركات العالمية المعتمدة المتطابقة مع توصيات المصنع، وتنظيف دورة الوقود والبخاخات بالكامل.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> تغيير زيت المحرك والجيربوكس بدقة</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> غسيل وتنظيف دورات التبريد</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-gray-800 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-2xl mb-6 transition-all group-hover:bg-brand-accent group-hover:text-brand-dark">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">الاستشارات وفحص ما قبل الشراء</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">هل ترغب بشراء سيارة مستعملة؟ نقوم بإجراء فحص هندسي ميكانيكي وكهربائي متكامل يعطيك تقريراً شاملاً عن حالة المركبة الحقيقية وقيمتها.</p>
+                    <ul class="text-xs text-brand-textMuted space-y-2">
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> فحص الهيكل ونظام النقل والكهربائيات</li>
+                        <li><i class="fa-solid fa-circle-check text-brand-accent ml-2"></i> تقدير تكاليف الإصلاحات المتوقعة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-24 bg-gray-900/40 border-t border-gray-800 relative">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,#0f172a,transparent_60%)] opacity-30"></div>
+        
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-base text-brand-accent font-bold tracking-widest uppercase mb-2"><i class="fa-solid fa-calendar-check ml-2"></i> احجز الآن</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">نظام الحجز المسبق والتفاعل الذكي</h3>
+                <p class="text-gray-400 mt-3 text-sm">املأ البيانات بالأسفل لإنشاء بطاقة الحجز الفخمة وإرسالها عبر الواتساب مباشرة، كما يمكنك تحميل البطاقة كملف PDF رسمي مخصص لك.</p>
+                <div class="w-24 h-1 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Booking Form Column -->
+                <div class="lg:col-span-7 bg-brand-card p-8 rounded-2xl border border-gray-800 shadow-xl space-y-6">
+                    <h4 class="text-xl font-bold text-white flex items-center border-b border-gray-800 pb-3"><i class="fa-solid fa-pen-to-square ml-3 text-brand-accent"></i> تفاصيل صاحب الحجز</h4>
+                    
+                    <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right">
+                        <!-- Full Name -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-300 mb-2">اسم العميل الثلاثي <span class="text-brand-accent">*</span></label>
+                            <input type="text" id="custName" required placeholder="مثال: أحمد علي جاسم" class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all">
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">رقم الهاتف <span class="text-brand-accent">*</span></label>
+                            <input type="tel" id="custPhone" required placeholder="07XXXXXXXX" class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all text-left" dir="ltr">
+                        </div>
+
+                        <!-- Car Brand/Model -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">نوع وموديل السيارة <span class="text-brand-accent">*</span></label>
+                            <input type="text" id="carModel" required placeholder="مثال: تويوتا كورولا 2022" class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all">
+                        </div>
+
+                        <!-- Service Type -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">نوع الخدمة المطلوبة <span class="text-brand-accent">*</span></label>
+                            <select id="serviceType" required class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all">
+                                <option value="" disabled selected>اختر الخدمة...</option>
+                                <option value="فحص وصيانة كمبيوتر">فحص وصيانة كمبيوتر</option>
+                                <option value="كهرباء سيارات وتكييف">كهرباء سيارات وتكييف</option>
+                                <option value="ميكانيك عام وتصفية محرك">ميكانيك عام وتصفية محرك</option>
+                                <option value="صيانة نظام تعليق ومكابح">صيانة نظام تعليق ومكابح</option>
+                                <option value="خدمة سريعة (زيوت وفلاتر)">خدمة سريعة (زيوت وفلاتر)</option>
+                                <option value="فحص سيارة قبل الشراء">فحص سيارة قبل الشراء</option>
+                                <option value="أخرى / استشارة ميكانيكية">أخرى / استشارة ميكانيكية</option>
+                            </select>
+                        </div>
+
+                        <!-- Preferred Date -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">تاريخ الحجز المفضل <span class="text-brand-accent">*</span></label>
+                            <input type="date" id="bookDate" required class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all">
+                        </div>
+
+                        <!-- Preferred Time -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">الوقت المفضل <span class="text-brand-accent">*</span></label>
+                            <select id="bookTime" required class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all">
+                                <option value="" disabled selected>اختر ساعة الحجز...</option>
+                                <option value="9:00 صباحاً - 11:00 صباحاً">9:00 صباحاً - 11:00 صباحاً</option>
+                                <option value="11:00 صباحاً - 1:00 ظهراً">11:00 صباحاً - 1:00 ظهراً</option>
+                                <option value="1:00 ظهراً - 3:00 عصراً">1:00 ظهراً - 3:00 عصراً</option>
+                                <option value="4:00 عصراً - 6:00 مساءً">4:00 عصراً - 6:00 مساءً</option>
+                                <option value="6:00 مساءً - 8:00 مساءً">6:00 مساءً - 8:00 مساءً</option>
+                            </select>
+                        </div>
+
+                        <!-- Notes / Problem Description -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-bold text-gray-300 mb-2">تفاصيل العطل أو ملاحظات إضافية (اختياري)</label>
+                            <textarea id="bookNotes" rows="3" placeholder="اكتب هنا إذا كانت هناك أعراض معينة تظهر على السيارة..." class="w-full bg-black/40 border border-gray-800 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent rounded-xl px-4 py-3 text-white outline-none transition-all resize-none"></textarea>
+                        </div>
+                    </form>
+
+                    <!-- Interactive Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button type="button" onclick="sendWhatsApp()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-green-600/25 flex items-center justify-center">
+                            <i class="fa-brands fa-whatsapp ml-2 text-xl"></i> إرسال وتأكيد عبر الواتساب
+                        </button>
+                        <button type="button" onclick="downloadPDF()" class="flex-1 bg-brand-accent hover:bg-brand-accentHover text-brand-dark py-3.5 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-brand-accent/20 flex items-center justify-center">
+                            <i class="fa-solid fa-file-pdf ml-2 text-xl"></i> تحميل تذكرة الحجز (PDF)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Ticket Column -->
+                <div class="lg:col-span-5 sticky top-28 space-y-6">
+                    <div class="bg-gray-950 border border-gray-800 p-2 rounded-2xl">
+                        <!-- Design of the Live Receipt Ticket which will also be used in the PDF -->
+                        <div id="ticketArea" class="bg-gradient-to-b from-gray-950 to-gray-900 border border-gray-800 p-6 rounded-xl relative overflow-hidden text-right text-white">
+                            <!-- Background watermark -->
+                            <div class="absolute -right-16 -bottom-16 text-gray-800/20 text-9xl transform -rotate-12 pointer-events-none select-none">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+
+                            <!-- Decorative Jagged Ticket Side Cuts -->
+                            <div class="absolute -left-3 top-1/2 w-6 h-6 bg-brand-dark border-r border-gray-800 rounded-full"></div>
+                            <div class="absolute -right-3 top-1/2 w-6 h-6 bg-brand-dark border-l border-gray-800 rounded-full"></div>
+
+                            <!-- Ticket Header -->
+                            <div class="flex justify-between items-start border-b-2 border-dashed border-gray-800 pb-6 mb-6">
+                                <div class="space-y-1">
+                                    <h5 class="text-brand-accent font-black text-lg tracking-wide">تذكرة موعد صيانة</h5>
+                                    <p class="text-[10px] text-brand-textMuted uppercase font-mono" id="ticketUID">رقم الحجز: --</p>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="font-extrabold text-xs text-white">ورشة المهندس الحسن خالد</h4>
+                                    <p class="text-[10px] text-brand-accent">هندسة ميكانيكية متميزة</p>
+                                    <p class="text-[9px] text-gray-400 font-mono">البصرة، العراق</p>
+                                </div>
+                            </div>
+
+                            <!-- Ticket Body/Fields -->
+                            <div class="space-y-4 text-xs">
+                                <div class="grid grid-cols-2 gap-y-4">
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">اسم العميل</span>
+                                        <span class="font-bold text-white text-sm" id="p_name">يرجى الكتابة...</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">الهاتف</span>
+                                        <span class="font-bold text-white text-sm font-mono" id="p_phone">--</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">السيارة</span>
+                                        <span class="font-bold text-white text-sm" id="p_car">--</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">نوع الخدمة</span>
+                                        <span class="font-bold text-brand-accent text-sm" id="p_service">--</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">تاريخ الحجز</span>
+                                        <span class="font-bold text-white text-sm font-mono" id="p_date">--</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] text-brand-textMuted block mb-0.5">وقت الحجز</span>
+                                        <span class="font-bold text-white text-sm" id="p_time">--</span>
+                                    </div>
+                                </div>
+
+                                <!-- Note section -->
+                                <div class="border-t border-gray-800 pt-4 mt-2">
+                                    <span class="text-[10px] text-brand-textMuted block mb-0.5">الوصف والملاحظات</span>
+                                    <p class="text-gray-300 italic text-[11px] leading-relaxed" id="p_notes">لا توجد ملاحظات إضافية.</p>
+                                </div>
+                            </div>
+
+                            <!-- Ticket Footer Area -->
+                            <div class="border-t-2 border-dashed border-gray-800/80 pt-6 mt-6 flex justify-between items-center text-[10px]">
+                                <div>
+                                    <p class="text-brand-textMuted">المهندس المسؤول</p>
+                                    <p class="font-bold text-white text-xs">م. الحسن خالد وليد</p>
+                                </div>
+                                <div class="text-left bg-brand-accent/10 border border-brand-accent/20 px-2 py-1 rounded">
+                                    <span class="text-brand-accent font-bold">بإشراف هندسي</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Direct Action Alert Box -->
+                    <div class="bg-gray-900/40 border border-gray-800/50 p-4 rounded-xl flex items-start space-x-3 space-x-reverse">
+                        <span class="text-brand-accent text-xl mt-0.5"><i class="fa-solid fa-lightbulb"></i></span>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            <strong class="text-white block mb-1">تلميح احترافي:</strong>
+                            سيتم تحديث تذكرة الحجز بشكل حي ومباشر بمجرد إدخال البيانات في الحقول المجاورة!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Contact Info Section -->
+    <section class="py-16 border-t border-gray-800/80 bg-gray-950/20 relative">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
+            <!-- Col 1 -->
+            <div class="bg-gray-900/40 p-6 rounded-2xl border border-gray-800 space-y-3">
+                <span class="w-10 h-10 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-location-dot"></i></span>
+                <h4 class="font-bold text-white text-lg">موقع الورشة</h4>
+                <p class="text-sm text-brand-textMuted">البصرة، العراق</p>
+                <p class="text-xs text-gray-400">يرجى مراجعة الموقع أو الاتصال قبل القدوم لضمان جهوزية طاقم العمل وتأكيد الموعد.</p>
+            </div>
+            <!-- Col 2 -->
+            <div class="bg-gray-900/40 p-6 rounded-2xl border border-gray-800 space-y-3">
+                <span class="w-10 h-10 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-phone"></i></span>
+                <h4 class="font-bold text-white text-lg">أرقام التواصل والواتساب</h4>
+                <p class="text-sm text-brand-textMuted font-mono" dir="ltr">+964 782 317 1438</p>
+                <p class="text-xs text-gray-400">متاحون للرد المباشر وحالات الطوارئ الميكانيكية وصيانة الطرق.</p>
+            </div>
+            <!-- Col 3 -->
+            <div class="bg-gray-900/40 p-6 rounded-2xl border border-gray-800 space-y-3">
+                <span class="w-10 h-10 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-clock"></i></span>
+                <h4 class="font-bold text-white text-lg">أوقات العمل</h4>
+                <p class="text-sm text-brand-textMuted">السبت - الخميس (من 9:00 ص وحتى 8:00 م)</p>
+                <p class="text-xs text-gray-400">يوم الجمعة عطلة الورشة الأسبوعية وتُقبل الحالات العاجلة فقط.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area (Rights Assigned to Mohamed Majid Al-Furaiji) -->
+    <footer class="bg-gray-950 border-t border-gray-900 py-12 text-center relative z-20">
+        <div class="container mx-auto px-4 space-y-6">
+            <div class="flex justify-center items-center space-x-2 space-x-reverse">
+                <div class="bg-brand-accent text-brand-dark w-10 h-10 rounded-xl flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-gears"></i>
+                </div>
+                <div class="text-right">
+                    <span class="text-lg font-black tracking-wide block">المهندس الحسن خالد وليد</span>
+                    <span class="text-xs text-brand-accent">بكالوريوس هندسة ميكانيكية - جامعة البصرة</span>
+                </div>
+            </div>
+            
+            <p class="text-sm text-brand-textMuted max-w-md mx-auto">
+                نحن هنا لنقدم صيانة بمعايير هندسية متكاملة لسيارتك. نهتم بالدقة والتشخيص الصحيح والأمان التام.
+            </p>
+
+            <div class="flex justify-center space-x-4 space-x-reverse text-gray-400">
+                <a href="https://wa.me/9647823171438" target="_blank" class="hover:text-brand-accent text-lg transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:+9647823171438" class="hover:text-brand-accent text-lg transition-colors"><i class="fa-solid fa-phone"></i></a>
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-brand-textMuted gap-4">
+                <p>جميع الحقوق محفوظة للمهندس الحسن خالد وليد © 2026</p>
+                <p class="flex items-center">
+                    تصميم وتطوير المهندس المبدع <span class="text-brand-accent font-bold mx-1">محمد ماجد الفريجي</span> <i class="fa-solid fa-laptop-code text-brand-accent mx-1"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Floating Alert Modal -->
+    <div id="customAlert" class="fixed bottom-6 left-6 z-50 bg-gray-900 border border-gray-800 text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-3 space-x-reverse max-w-sm">
+        <div id="alertIcon" class="text-xl"></div>
+        <div>
+            <h5 id="alertTitle" class="font-bold text-sm"></h5>
+            <p id="alertDesc" class="text-xs text-brand-textMuted mt-0.5"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions logic -->
+    <script>
+        // 1. Sidebar Toggle Mechanics
+        const menuBtn = document.getElementById('menuBtn');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
+
+        function toggleDrawer() {
+            sideDrawer.classList.toggle('translate-x-full');
+            // Animate Hamburger
+            const spans = menuBtn.querySelectorAll('span');
+            spans[0].classList.toggle('rotate-45');
+            spans[0].classList.toggle('translate-y-2.5');
+            spans[1].classList.toggle('opacity-0');
+            spans[2].classList.toggle('-rotate-45');
+            spans[2].classList.toggle('-translate-y-2.5');
+        }
+
+        menuBtn.addEventListener('click', toggleDrawer);
+        closeDrawerBtn.addEventListener('click', toggleDrawer);
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(!sideDrawer.classList.contains('translate-x-full')) {
+                    toggleDrawer();
+                }
+            });
+        });
+
+        // Close sidebar if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!sideDrawer.contains(e.target) && !menuBtn.contains(e.target) && !sideDrawer.classList.contains('translate-x-full')) {
+                toggleDrawer();
+            }
+        });
+
+        // 2. Generate unique dynamic booking code on load
+        function generateUID() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let result = 'HK-';
+            for (let i = 0; i < 5; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+        const bookingID = generateUID();
+        document.getElementById('ticketUID').innerText = `رقم الحجز: ${bookingID}`;
+
+        // 3. Live Updating Ticket Fields from Form
+        const inputMap = {
+            'custName': 'p_name',
+            'custPhone': 'p_phone',
+            'carModel': 'p_car',
+            'serviceType': 'p_service',
+            'bookDate': 'p_date',
+            'bookTime': 'p_time',
+            'bookNotes': 'p_notes'
+        };
+
+        Object.keys(inputMap).forEach(id => {
+            const inputEl = document.getElementById(id);
+            const previewEl = document.getElementById(inputMap[id]);
+
+            inputEl.addEventListener('input', () => {
+                if (inputEl.value.trim() !== '') {
+                    previewEl.innerText = inputEl.value;
+                    previewEl.classList.remove('italic', 'text-brand-textMuted');
+                } else {
+                    if (id === 'bookNotes') {
+                        previewEl.innerText = 'لا توجد ملاحظات إضافية.';
+                    } else {
+                        previewEl.innerText = '--';
+                    }
+                }
+            });
+        });
+
+        // 4. Toast Alert system instead of window.alert()
+        function showToast(title, desc, type = 'success') {
+            const alertBox = document.getElementById('customAlert');
+            const iconBox = document.getElementById('alertIcon');
+            const titleBox = document.getElementById('alertTitle');
+            const descBox = document.getElementById('alertDesc');
+
+            titleBox.innerText = title;
+            descBox.innerText = desc;
+
+            if (type === 'success') {
+                iconBox.innerHTML = '<i class="fa-solid fa-circle-check text-green-500"></i>';
+                alertBox.className = "fixed bottom-6 left-6 z-50 bg-gray-900 border border-green-800/50 text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 max-w-sm";
+            } else {
+                iconBox.innerHTML = '<i class="fa-solid fa-circle-exclamation text-yellow-500"></i>';
+                alertBox.className = "fixed bottom-6 left-6 z-50 bg-gray-900 border border-yellow-800/50 text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 max-w-sm";
+            }
+
+            // Hide after 4 seconds
+            setTimeout(() => {
+                alertBox.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+        }
+
+        // 5. WhatsApp Booking integration
+        function sendWhatsApp() {
+            const form = document.getElementById('bookingForm');
+            if(!form.checkValidity()) {
+                form.reportValidity();
+                showToast('تنبيه', 'يرجى إكمال الحقول المطلوبة أولاً لتأكيد الموعد.', 'warning');
+                return;
+            }
+
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const car = document.getElementById('carModel').value;
+            const service = document.getElementById('serviceType').value;
+            const date = document.getElementById('bookDate').value;
+            const time = document.getElementById('bookTime').value;
+            const notes = document.getElementById('bookNotes').value || 'لا توجد ملاحظات إضافية';
+
+            const message = `*حجز موعد جديد في ورشة الصيانة للمهندس الحسن خالد* %0A%0A` +
+                            `🔧 *رقم الحجز:* ${bookingID}%0A` +
+                            `👤 *اسم العميل:* ${name}%0A` +
+                            `📞 *رقم الهاتف:* ${phone}%0A` +
+                            `🚗 *السيارة وموديلها:* ${car}%0A` +
+                            `🛠️ *الخدمة المطلوبة:* ${service}%0A` +
+                            `📅 *التاريخ:* ${date}%0A` +
+                            `⏰ *الوقت المفضل:* ${time}%0A` +
+                            `📝 *ملاحظات:* ${notes}%0A%0A` +
+                            `_تم الحجز وإرسال التذكرة تلقائياً عبر الموقع الرسمي للمهندس الحسن_`;
+
+            const whatsappNumber = "9647823171438"; // Cleaned standard format for wa.me API
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            showToast('رائع!', 'جاري نقلك لتطبيق واتساب لتأكيد موعد الحجز...', 'success');
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1500);
+        }
+
+        // 6. PDF Ticket generation using html2pdf
+        function downloadPDF() {
+            const form = document.getElementById('bookingForm');
+            if(!form.checkValidity()) {
+                form.reportValidity();
+                showToast('تنبيه', 'يرجى إدخال كافة البيانات أولاً لتوليد التذكرة بصيغة PDF.', 'warning');
+                return;
+            }
+
+            const ticketElement = document.getElementById('ticketArea');
+            const name = document.getElementById('custName').value;
+
+            // html2pdf configuration parameters
+            const opt = {
+                margin:       10,
+                filename:     `حجز_المهندس_الحسن_${name}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#05070c' },
+                jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' }
+            };
+
+            showToast('معالجة البيانات', 'جاري إعداد وتحميل تذكرة الحجز بصيغة PDF...', 'success');
+
+            // Running conversion process
+            html2pdf().from(ticketElement).set(opt).save().catch(err => {
+                showToast('خطأ!', 'حدثت مشكلة أثناء تصدير ملف الـ PDF.', 'warning');
+                console.error(err);
+            });
+        }
+    </script>
+</body>
+</html>
+
